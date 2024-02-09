@@ -9,6 +9,21 @@ public class Individual {
      * Each character represents a gene
      */
     ArrayList<Character> chromosome;
+
+    public static void main(String[] args){
+        Individual sam = new Individual(8, 5, 1);
+        Individual fred = new Individual(8, 5, 1);
+
+        Individual shawty = new Individual(sam, fred, 8, 100);
+
+        System.out.println("Sam chromosome: " + sam.toString());
+        System.out.println("Fred chromosome: " + fred.toString());
+        System.out.println("Shawty chromosome: " + shawty.toString());
+
+        System.out.println(sam.getFitness());
+        System.out.println(fred.getFitness());
+        System.out.println(shawty.getFitness());
+    }
     
     /**
      * Chooses a letter at random, in the range from A to the number of states indicated
@@ -62,13 +77,12 @@ public class Individual {
       * @param c_max The maximum chromosome size
       * @param m The chances per round of mutation in each gene
       */
-    public Individual(Individual parent1, Individual parent2, int c_max, double m) {
+    public Individual(Individual parent1, Individual parent2, int c_max, float m) {
       // fill in
         chromosome = new ArrayList<Character>();
 
         String prefix = parent1.toString().substring(0, (int)(Math.random()*parent1.toString().length()));
         String suffix = parent2.toString().substring((int)(Math.random()*parent2.toString().length()));
-
         String fin = prefix + suffix;
 
         if(fin.length() > c_max){
@@ -78,6 +92,9 @@ public class Individual {
         String[] strSplit = fin.split("");
         for(int i = 0; i < strSplit.length; i++){
             chromosome.add(i, strSplit[i].charAt(0));
+            if(doesMutate(m)){
+                chromosome.set(i, randomLetter(5));
+            }
         }
     }
 
@@ -86,20 +103,26 @@ public class Individual {
      * @return The fitness score as an int
      */
     public int getFitness() {
-        // fill in
-        // remove the return below and write your own
-        return 0;
-    }
+        int fitScore = 0;
 
-    public static void main(String[] args){
-        Individual sam = new Individual(8, 5, 1);
-        Individual fred = new Individual(8, 5, 1);
+        if(chromosome.size() % 2 == 1){
+            fitScore += 1;
+        }
 
-        Individual shawty = new Individual(sam, fred, 8, 2);
+        for(int i = 0; i < chromosome.size()/2; i++){
+            if (chromosome.get(i) == (chromosome.get((chromosome.size()-1)-i))){
+                fitScore += 1;
+            } else {
+                fitScore -= 1;
+            }
+        }
 
-        System.out.println(sam.toString());
-        System.out.println(fred.toString());
-        System.out.println(shawty.toString());
+        for(int i = 0; i < chromosome.size()-1; i++){
+            if(chromosome.get(i) == (chromosome.get(i+1))){
+                fitScore -= 1;
+            }
+        }
+        return fitScore;
     }
     
 }
