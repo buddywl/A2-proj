@@ -1,5 +1,6 @@
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.ArrayList;
+import java.lang.Math;
 //test
 public class Individual {
 
@@ -43,13 +44,18 @@ public class Individual {
     /** 
      * Initial constructor to generate initial population members
      * @param c_0 The initial chromosome size
-     * @param num_letters The number of letters available to choose from
+     * @param g The number of letters available to choose from
      */
-    public Individual(int c_0, int num_letters, int n) {
-      // fill in
+    public Individual(int c_0, int g, int n) {
+        chromosome = new ArrayList<Character>();
+
+        for(int i = 0; i < c_0; i++){
+            chromosome.add(randomLetter(g));
+        }
     }
 
-     /**
+
+    /**
       * Second constructor to create parents and offspring chromosomes
       * @param parent1 The first parent chromosome
       * @param parent2 The second parent chromosome
@@ -58,6 +64,21 @@ public class Individual {
       */
     public Individual(Individual parent1, Individual parent2, int c_max, double m) {
       // fill in
+        chromosome = new ArrayList<Character>();
+
+        String prefix = parent1.toString().substring(0, (int)(Math.random()*parent1.toString().length()));
+        String suffix = parent2.toString().substring((int)(Math.random()*parent2.toString().length()));
+
+        String fin = prefix + suffix;
+
+        if(fin.length() > c_max){
+            fin = fin.substring(0, c_max);
+        }
+
+        String[] strSplit = fin.split("");
+        for(int i = 0; i < strSplit.length; i++){
+            chromosome.add(i, strSplit[i].charAt(0));
+        }
     }
 
     /**
@@ -68,6 +89,17 @@ public class Individual {
         // fill in
         // remove the return below and write your own
         return 0;
+    }
+
+    public static void main(String[] args){
+        Individual sam = new Individual(8, 5, 1);
+        Individual fred = new Individual(8, 5, 1);
+
+        Individual shawty = new Individual(sam, fred, 8, 2);
+
+        System.out.println(sam.toString());
+        System.out.println(fred.toString());
+        System.out.println(shawty.toString());
     }
     
 }
