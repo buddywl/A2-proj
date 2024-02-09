@@ -11,8 +11,8 @@ public class Individual {
     ArrayList<Character> chromosome;
 
     public static void main(String[] args){
-        Individual sam = new Individual(8, 5, 1);
-        Individual fred = new Individual(8, 5, 1);
+        Individual sam = new Individual(8, 5);
+        Individual fred = new Individual(8, 5);
 
         Individual shawty = new Individual(sam, fred, 8, 100);
 
@@ -39,7 +39,7 @@ public class Individual {
      * @param m the mutation rate
      * @return true if a number randomly chosen between 0 and 1 is less than ***m***, else false
     */
-    private Boolean doesMutate(float m){
+    private Boolean doesMutate(double m){
         float randomNum = ThreadLocalRandom.current().nextInt(0, 1);
         return randomNum < m;
     }
@@ -61,7 +61,7 @@ public class Individual {
      * @param c_0 The initial chromosome size
      * @param g The number of letters available to choose from
      */
-    public Individual(int c_0, int g, int n) {
+    public Individual(int c_0, int g) {             //int n???
         chromosome = new ArrayList<Character>();
 
         for(int i = 0; i < c_0; i++){
@@ -77,7 +77,7 @@ public class Individual {
       * @param c_max The maximum chromosome size
       * @param m The chances per round of mutation in each gene
       */
-    public Individual(Individual parent1, Individual parent2, int c_max, float m) {
+    public Individual(Individual parent1, Individual parent2, int c_max, double m) {
       // fill in
         chromosome = new ArrayList<Character>();
 
