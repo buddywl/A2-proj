@@ -64,21 +64,21 @@ public class GA_Simulation {
         System.out.println("fittest individual: " + pop.get(0).getFitness());
         System.out.println("                    " + pop.get(0).toString());
         System.out.println("kth individual:     " + pop.get(k).getFitness());
-        System.out.println("                    " + pop.get(k).toString() + "\n---------------------\n");
+        System.out.println("                    " + pop.get(k).toString() + "\n--------------------------\n");
 
     }
 
     public void run(){
         int generation = 1;
-        System.out.println(generation + "\n");
+        System.out.println(generation + " -----------------------");
         ArrayList<Individual> population = init();
         population = evolve(population);
         describeGeneration(population);
 
         while (generation < r){
-            System.out.println(generation + " ------------------");
-            population = evolve(population);
             generation++;
+            System.out.println(generation + " -----------------------");
+            population = evolve(population);
             describeGeneration(population);
         }
     }
