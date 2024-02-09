@@ -14,11 +14,11 @@ public class Individual {
         Individual sam = new Individual(8, 5);
         Individual fred = new Individual(8, 5);
 
-        Individual shawty = new Individual(sam, fred, 8, 100);
+        Individual shawty = new Individual(sam, fred, 16, 0.1);
 
-        System.out.println("Sam chromosome: " + sam.toString());
-        System.out.println("Fred chromosome: " + fred.toString());
-        System.out.println("Shawty chromosome: " + shawty.toString());
+        System.out.println("Sam chromosome: " + sam);
+        System.out.println("Fred chromosome: " + fred);
+        System.out.println("Shawty chromosome: " + shawty);
 
         System.out.println(sam.getFitness());
         System.out.println(fred.getFitness());
@@ -39,8 +39,13 @@ public class Individual {
      * @param m the mutation rate
      * @return true if a number randomly chosen between 0 and 1 is less than ***m***, else false
     */
-    private Boolean doesMutate(double m){
-        float randomNum = ThreadLocalRandom.current().nextInt(0, 1);
+//    private boolean doesMutate(float m){
+//        float randomNum = ThreadLocalRandom.current().nextInt(0, 1);
+//        return randomNum < m;
+//    }
+
+    private boolean doesMutate(double m){
+        double randomNum = Math.random();
         return randomNum < m;
     }
 
@@ -62,7 +67,7 @@ public class Individual {
      * @param g The number of letters available to choose from
      */
     public Individual(int c_0, int g) {             //int n???
-        chromosome = new ArrayList<Character>();
+        chromosome = new ArrayList<>();
 
         for(int i = 0; i < c_0; i++){
             chromosome.add(randomLetter(g));
@@ -79,11 +84,12 @@ public class Individual {
       */
     public Individual(Individual parent1, Individual parent2, int c_max, double m) {
       // fill in
-        chromosome = new ArrayList<Character>();
+        chromosome = new ArrayList<>();
 
         String prefix = parent1.toString().substring(0, (int)(Math.random()*parent1.toString().length()));
-        String suffix = parent2.toString().substring((int)(Math.random()*parent2.toString().length()));
-        String fin = prefix + suffix;
+        String suffix = parent2.toString().substring((int)(Math.random()*parent2.toString().length()-1));
+        String fin = prefix.concat(suffix);
+        boolean mutate;
 
         if(fin.length() > c_max){
             fin = fin.substring(0, c_max);
@@ -91,11 +97,14 @@ public class Individual {
 
         String[] strSplit = fin.split("");
         for(int i = 0; i < strSplit.length; i++){
+            mutate = doesMutate(m);
+//            System.out.println(mutate);
             chromosome.add(i, strSplit[i].charAt(0));
-            if(doesMutate(m)){
+            if(mutate){
                 chromosome.set(i, randomLetter(5));
             }
         }
+
     }
 
     /**

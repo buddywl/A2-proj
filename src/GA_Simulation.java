@@ -1,4 +1,4 @@
-import java.util.concurrent.ThreadLocalRandom;
+//import java.util.concurrent.ThreadLocalRandom;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -23,7 +23,7 @@ public class GA_Simulation {
 
     /** Sorts population by fitness score, best first 
      * @param pop: ArrayList of Individuals in the current generation
-     * @return: An ArrayList of Individuals sorted by fitness
+     * returns an ArrayList of Individuals sorted by fitness
     */
     public void rankPopulation(ArrayList<Individual> pop) {
         // sort population by fitness
@@ -47,8 +47,7 @@ public class GA_Simulation {
     public ArrayList<Individual> evolve(ArrayList<Individual> pop){
         rankPopulation(pop);
         Individual[] winners = new Individual[k];
-//        ArrayList<Individual> nextGen = new ArrayList<>();
-//        nextGen.ensureCapacity(n);
+
         for(int i = 0; i < k; i++){
             winners[i] = pop.get(i);
         }
@@ -61,30 +60,30 @@ public class GA_Simulation {
     }
 
     public void describeGeneration(ArrayList<Individual> pop){
-        System.out.println("fittest individual: " + pop.get(0).getFitness());
-        System.out.println("                    " + pop.get(0).toString());
-        System.out.println("kth individual:     " + pop.get(k).getFitness());
-        System.out.println("                    " + pop.get(k).toString() + "\n--------------------------\n");
+        System.out.println("|  fittest individual: " + pop.get(0).getFitness());
+        System.out.println("|                      " + pop.get(0).toString());
+        System.out.println("|  kth individual:     " + pop.get(k).getFitness());
+        System.out.println("|                      " + pop.get(k).toString() + "\n------------------------------------\n");
 
     }
 
     public void run(){
         int generation = 1;
-        System.out.println(generation + " -----------------------");
+        System.out.println(generation + " ---------------------------------");
         ArrayList<Individual> population = init();
         population = evolve(population);
         describeGeneration(population);
 
         while (generation < r){
             generation++;
-            System.out.println(generation + " -----------------------");
+            System.out.println(generation + " ---------------------------------");
             population = evolve(population);
             describeGeneration(population);
         }
     }
 
     public static void main(String[] args){
-        GA_Simulation sim = new GA_Simulation(100, 15, 100, 8, 20, 0.01, 5);
+        GA_Simulation sim = new GA_Simulation(100, 15, 100, 8, 20, 0.1, 5);
         sim.run();
 
     }
