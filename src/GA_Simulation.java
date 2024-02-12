@@ -101,6 +101,10 @@ public class GA_Simulation {
         }
     }
 
+    /**
+     *Specifies the parameters and runs the simulation using the run() method
+     * @param args: command line arguments (ignored)
+     */
     public static void main(String[] args){
         GA_Simulation sim = new GA_Simulation(100, 15, 100, 8, 20, 0.1, 5);
         sim.run();
