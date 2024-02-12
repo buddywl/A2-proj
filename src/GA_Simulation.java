@@ -21,7 +21,8 @@ public class GA_Simulation {
         this.g = g;
     }
 
-    /** Sorts population by fitness score, best first 
+    /**
+     * Sorts population by fitness score, best first
      * @param pop: ArrayList of Individuals in the current generation
      * returns an ArrayList of Individuals sorted by fitness
     */
@@ -36,6 +37,10 @@ public class GA_Simulation {
         pop.sort(ranker);
     }
 
+    /**
+     * Initializes a population of n individuals
+     * @return population: an ArrayList of the initialized population
+     */
     public ArrayList<Individual> init(){
         ArrayList<Individual> population = new ArrayList<>();
         while(population.size() < n){
@@ -44,6 +49,11 @@ public class GA_Simulation {
         return population;
     }
 
+    /**
+     * Sorts the population by fitness score, then makes a new generation using only the gene pool of the fittest k individuals
+     * @param pop
+     * @return pop: Arraylist of the new generation of individuals
+     */
     public ArrayList<Individual> evolve(ArrayList<Individual> pop){
         rankPopulation(pop);
         Individual[] winners = new Individual[k];
@@ -59,19 +69,28 @@ public class GA_Simulation {
         return pop;
     }
 
+    /**
+     * Prints out the fitness score of the fittest adn kth inidivuals and their chromosomes
+     * @param pop
+     */
     public void describeGeneration(ArrayList<Individual> pop){
         System.out.println("|  fittest individual: " + pop.get(0).getFitness());
         System.out.println("|                      " + pop.get(0).toString());
         System.out.println("|  kth individual:     " + pop.get(k).getFitness());
-        System.out.println("|                      " + pop.get(k).toString() + "\n------------------------------------\n");
+        System.out.println("|                      " + pop.get(k).toString() + "\n------------------------------------\n\n");
 
     }
 
+    /**
+     * Method that runs the simulation (calls the methods written in the class)
+     * Calls init() to initialize the population, then evolves the population and describes it.
+     * Then, evolves the population for r number of generations
+     */
     public void run(){
         int generation = 1;
         System.out.println(generation + " ---------------------------------");
         ArrayList<Individual> population = init();
-        population = evolve(population);
+        rankPopulation(population);
         describeGeneration(population);
 
         while (generation < r){
@@ -85,6 +104,5 @@ public class GA_Simulation {
     public static void main(String[] args){
         GA_Simulation sim = new GA_Simulation(100, 15, 100, 8, 20, 0.1, 5);
         sim.run();
-
     }
 }
