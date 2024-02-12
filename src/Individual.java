@@ -10,6 +10,10 @@ public class Individual {
      */
     ArrayList<Character> chromosome;
 
+    /**
+     * Demonstrates the use of both Individual constructors and the getFitness() method
+     * @param args: command line arguments (ignored)
+     */
     public static void main(String[] args){
         Individual sam = new Individual(8, 5);
         Individual fred = new Individual(8, 5);
