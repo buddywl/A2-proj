@@ -123,7 +123,7 @@ public class Individual {
         }
 
         for(int i = 0; i < chromosome.size()/2; i++){
-            if (chromosome.get(i) == (chromosome.get((chromosome.size()-1)-i))){
+            if (chromosome.get(i).equals((chromosome.get((chromosome.size()-1)-i)))){
                 fitScore += 1;
             } else {
                 fitScore -= 1;
@@ -131,7 +131,7 @@ public class Individual {
         }
 
         for(int i = 0; i < chromosome.size()-1; i++){
-            if(chromosome.get(i) == (chromosome.get(i+1))){
+            if(chromosome.get(i).equals((chromosome.get(i+1)))){
                 fitScore -= 1;
             }
         }
