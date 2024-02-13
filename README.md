@@ -11,6 +11,7 @@
 * I noticed a gradual increase in the fitness score of individuals as more generations passed --> survival of the fittest!
 * It only took one evolution to produce a perfect palindrome chromosome, and as generations went on, there was often an alternating pattern in the chromosomes between two letters (ie. EDEDEDE, or CBCBC)
 * Furthermore, most of the winning individuals who wre allowed to reproduce had an odd number of letters in its chromosome.
+* The fitness score did also seem to cap at a specific value, which could be changed by allowing the chromosome length to be longer. No matter how many rounds of evolution, the fitscore always converged to a specific maximum.
 
 
 **Reflection on Your experience with this assignment:**

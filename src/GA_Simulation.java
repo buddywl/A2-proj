@@ -113,5 +113,10 @@ public class GA_Simulation {
         GA_Simulation sim = new GA_Simulation(100, 15, 100, 8, 15, 0.1, 5);
         System.out.println("\n Running simulation for " + sim.r + " generations on a population of " + sim.n + " individuals. Only the fittest " + sim.k + " individuals will be allowed to produce, and the initial population has a max chromosome length of " + sim.c_0 + " letters from a pool of " + sim.g + " letters. Child inidividuals have a mutation rate of " + sim.m + " for each letter in their chromosome, and their chromosomes have a max length of " + sim.c_max + ".\n");
         sim.run();
+
+        GA_Simulation sim2 = new GA_Simulation(100, 20, 1000, 10, 50, 0.1, 10);
+        System.out.println("\n Running simulation for " + sim2.r + " generations on a population of " + sim2.n + " individuals. Only the fittest " + sim2.k + " individuals will be allowed to produce, and the initial population has a max chromosome length of " + sim2.c_0 + " letters from a pool of " + sim2.g + " letters. Child inidividuals have a mutation rate of " + sim2.m + " for each letter in their chromosome, and their chromosomes have a max length of " + sim2.c_max + ".\n");
+
+        sim2.run();
     }
 }
